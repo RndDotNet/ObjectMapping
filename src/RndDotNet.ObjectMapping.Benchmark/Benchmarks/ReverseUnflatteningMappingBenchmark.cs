@@ -5,23 +5,29 @@ using RndDotNet.ObjectMapping.Benchmark.Models;
 
 namespace RndDotNet.ObjectMapping.Benchmark.Benchmarks;
 
-public class ReverseUnflatteningMappingBenchmark : MappingBenchmarkWithMapsterConfigBase<FlattenUser, FlattenUserDto>
+public class ReverseUnflatteningMappingBenchmark
 {
-	protected override Action<TypeAdapterSetter<FlattenUser, FlattenUserDto>> ConfigureMapster()
-		=> config => config.TwoWays();
-
-	protected override Action<IMapperConfigurationExpression> ConfigureAutoMapper()
-		=> cfg => cfg.CreateMap<FlattenUser, FlattenUserDto>().ReverseMap();
-
-	protected override Func<int, List<FlattenUser>> GetFillSourceDataDelegate()
-		=> FakeDataHelper.GetFlattenUsers;
+	private const int Size = 1000;
+	private List<FlattenUserDto> source;
+	private IMapper mapper;
+	
+	[GlobalSetup]
+	public void GlobalSetup()
+	{
+		mapper = new MapperConfiguration(cfg => cfg
+				.CreateMap<FlattenUser, FlattenUserDto>()
+				.ReverseMap())
+			.CreateMapper();
+		TypeAdapterConfig<FlattenUser, FlattenUserDto>.NewConfig().TwoWays();
+		source = FakeDataHelper.GetFlattenUsersDto(Size);
+	}
 	
 	[Benchmark(Description = "AutoMapper_ReverseMapping")]
 	public void AutoMapperReverseMapping()
 	{
 		for (var i = 0; i < Size; i++)
 		{
-			var destination = Mapper.Map<FlattenUserDto>(Source[i]);
+			var destination = mapper.Map<FlattenUser>(source[i]);
 		}
 	}
 	
@@ -30,7 +36,7 @@ public class ReverseUnflatteningMappingBenchmark : MappingBenchmarkWithMapsterCo
 	{
 		for (var i = 0; i < Size; i++)
 		{
-			var destination = Source[i].Adapt<FlattenUserDto>();
+			var destination = source[i].Adapt<FlattenUser>();
 		}
 	}
 }

@@ -49,6 +49,13 @@ public class FakeDataHelper
 		return faker.Generate(count);
 	}
 	
+	public static List<FlattenUserDto> GetFlattenUsersDto(int count)
+	{
+		var faker = new Faker<FlattenUserDto>()
+			.Rules((f, o) => o.AddressZipCode = f.Address.ZipCode());
+		return faker.Generate(count);
+	}
+	
 	public static List<CustomPropertyUser> GetCustomPropertyUsers(int count)
 	{
 		var faker = new Faker<CustomPropertyUser>()
