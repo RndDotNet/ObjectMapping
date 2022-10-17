@@ -20,8 +20,8 @@ RunStrategy=Throughput  WarmupCount=30
 |            Mapster_SimpleMapping | 235.87 us | 0.628 us |  8.492 us |  1.000 | 109.38 KB |
 |           AutoMapper_ListMapping | 208.90 us | 0.234 us |  2.949 us |  1.021 | 125.59 KB |
 |              Mapster_ListMapping | 204.54 us | 0.357 us |  4.846 us |  1.000 | 117.24 KB |
-|         AutoMapper_NestedMapping |  98.44 us | 0.389 us |  5.095 us |  1.751 |  54.69 KB |
-|            Mapster_NestedMapping |  56.19 us | 0.233 us |  3.097 us |  1.000 | 117.19 KB |
+|         AutoMapper_NestedMapping | 128.83 us | 0.285 us |  6.069 us |  2.079 | 117.19 KB |
+|            Mapster_NestedMapping |  61.94 us | 0.262 us |  2.914 us |  1.000 | 117.19 KB |
 |      AutoMapper_FlattenedMapping |  88.15 us | 0.197 us |  2.666 us |  2.862 |  23.44 KB |
 |         Mapster_FlattenedMapping |  30.79 us | 0.054 us |  0.735 us |  1.000 |  23.44 KB |
 | AutoMapper_CustomPropertyMapping | 175.77 us | 0.517 us |  6.859 us |  1.551 |  73.96 KB |
